@@ -31,4 +31,42 @@
  */
 export function calculateTip(billAmount, serviceRating) {
   // Your code here
+  if (billAmount <= 0) {
+    return null
+  }
+
+  if (typeof serviceRating !== "number" && serviceRating < 1 && serviceRating > 5){
+    return null
+  }
+
+  const finalRes = {
+    tipPercentage: 0,
+    tipAmount: 0,
+    totalAmount: 0
+  }
+
+  switch (serviceRating) {
+    case 1:
+      finalRes.tipPercentage = 5;
+      break;
+    case 2:
+      finalRes.tipPercentage = 10;
+      break;
+    case 3:
+      finalRes.tipPercentage = 15;
+      break;
+    case 4:
+      finalRes.tipPercentage = 20;
+      break;
+    case 5:
+      finalRes.tipPercentage = 25;
+      break;
+    default:
+      return null;
+  }
+
+  finalRes.tipAmount = billAmount * (finalRes.tipPercentage / 100);
+  finalRes.totalAmount = finalRes.tipAmount + billAmount;
+
+  return finalRes
 }
